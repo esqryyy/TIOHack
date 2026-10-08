@@ -1,0 +1,8 @@
+Package: com.dj.tiohack
+Name: Territorial.io Hack
+Version: 1.0
+Architecture: iphoneos-arm64
+Description: Territory floor + resource peg
+Author: dj
+Section: Tweaks
+Depends: mobilesubstrate
