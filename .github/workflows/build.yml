@@ -1,0 +1,29 @@
+name: Build TIOHack
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: brew install ldid xz
+
+      - name: Install Theos
+        run: |
+          git clone --recursive https://github.com/theos/theos ~/theos
+          curl -LO https://github.com/theos/sdks/archive/master.tar.gz
+          tar -xzf master.tar.gz -C ~/theos/sdks
+
+      - name: Build package
+        run: make package
+        env:
+          THEOS: /Users/runner/theos
+
+      - name: Upload .deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: TIOHack-deb
+          path: packages/*.deb
